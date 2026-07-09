@@ -84,40 +84,35 @@ export default function App() {
         {/* CSS Art Background for Warm Pink/Rose Vibe */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#831843] via-[#db2777] to-[#f472b6]"></div>
         
-        {/* Decorative Glow & Shapes */}
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 md:left-2/3 w-64 h-64 bg-gradient-to-tr from-yellow-200 to-pink-400 rounded-full blur-[2px] opacity-80 shadow-[0_0_80px_rgba(244,114,182,0.6)]"></div>
+        {/* Decorative Shapes (태양 삭제 완료) */}
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#4c0519]/30 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] bg-[#fbcfe8]/20 rounded-full blur-3xl"></div>
         
         {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')]"></div>
 
+        {/* 세움교회 CI (좌측 상단 고정) */}
+        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
+          <img 
+            src="image_7f3404.png" 
+            alt="세움교회 CI" 
+            className="h-10 sm:h-12 md:h-14 w-auto object-contain brightness-0 invert opacity-95 drop-shadow-md" 
+          />
+        </div>
+
         {/* Hero Content */}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center">
           
-          <div className="animate-fade-in-up flex flex-col items-center">
+          <div className="animate-fade-in-up flex flex-col items-center mt-8">
             
-            {/* 로고 및 메인 타이틀 영역 */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-8 mb-8">
-              
-              {/* 세움교회 CI (화이트 반전 & 빛 효과) */}
-              <div className="shrink-0 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-white/30 blur-2xl rounded-full"></div>
-                <img 
-                  src="image_7f3404.png" 
-                  alt="세움교회 CI" 
-                  className="relative z-10 h-[70px] sm:h-[80px] md:h-[100px] w-auto object-contain brightness-0 invert opacity-95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)]" 
-                />
-              </div>
-
-              {/* 메인 타이틀 이미지 (텍스트 대체) */}
+            {/* 메인 타이틀 이미지 영역 */}
+            <div className="flex justify-center mb-8">
               <div className="relative flex items-center justify-center transform hover:scale-105 transition-transform duration-500">
-                {/* 이미지 뒤 은은한 후광 효과 */}
-                <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full"></div>
+                {/* mix-blend-multiply를 사용하여 이미지의 하얀색 배경을 투명하게 만듦 */}
                 <img 
                   src="image_8171fd.png" 
                   alt="거룩한 家 온가족 수련회" 
-                  className="relative z-10 h-[140px] sm:h-[160px] md:h-[180px] w-auto object-contain drop-shadow-2xl" 
+                  className="relative z-10 h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain mix-blend-multiply" 
                 />
               </div>
             </div>
