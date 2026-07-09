@@ -78,69 +78,70 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFF5F7] font-sans selection:bg-pink-300 selection:text-pink-900 pb-20">
-      
-      {/* 1. HERO SECTION : 화사한 핑크 톤 비주얼 */}
-      <header className="relative w-full h-[480px] lg:h-[400px] overflow-hidden bg-[#831843]">
-        {/* CSS Art Background for Warm Pink/Rose Vibe */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#831843] via-[#db2777] to-[#f472b6]"></div>
+      {/* 1. HERO SECTION : 화사한 피치/코랄 톤 비주얼 */}
+      <header className="relative w-full h-[400px] lg:h-[350px] overflow-hidden bg-rose-50/50 pb-8 pt-16">
         
-        {/* Decorative Shapes (태양 삭제 완료) */}
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#4c0519]/30 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] bg-[#fbcfe8]/20 rounded-full blur-3xl"></div>
+        {/* 따뜻한 노을빛 피치 & 코랄 그라데이션 배경 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-200/50 via-rose-100/50 to-[#FFF5F7]"></div>
         
         {/* Subtle grid pattern overlay */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')]"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjUwLDIwNCwyMTUsMC4yKSIvPjwvc3ZnPg==')]"></div>
 
         {/* 세움교회 CI (좌측 상단 고정) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-200/50 via-rose-100/50 to-[#FFF5F7]"></div>
+        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
           <img 
             src="image_7f3404.png" 
             alt="세움교회 CI" 
-            className="h-10 sm:h-12 md:h-14 w-auto object-contain brightness-0 invert opacity-95 drop-shadow-md" 
+            className="h-[70px] sm:h-[80px] md:h-[100px] w-auto object-contain drop-shadow-md" 
           />
         </div>
 
         {/* Hero Content */}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center">
           
-          <div className="animate-fade-in-up flex flex-col items-center mt-8">
+          <div className="animate-fade-in-up flex flex-col items-center mt-8 md:mt-2">
             
             {/* 메인 타이틀 이미지 영역 */}
-            <div className="flex justify-center mb-8">
-              {/* 🚨 수정된 부분: mix-blend-multiply를 애니메이션이 있는 부모 div로 이동시켰습니다! */}
-              <div className="relative flex items-center justify-center transform hover:scale-105 transition-transform duration-500 mix-blend-multiply">
-                <img 
-                  src="image_8171fd.png" 
-                  alt="거룩한 家 온가족 수련회" 
-                  className="h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain" 
-                />
-              </div>
+            <div className="flex justify-center mb-8 relative">
+                {/* 배경을 투명하게 만드는 애니메이션 컨테이너 */}
+                <div className="relative flex items-center justify-center mix-blend-multiply transform hover:scale-105 transition-transform duration-500">
+                  <img 
+                    src="image_8171fd.png" 
+                    alt="거룩한 家 온가족 수련회" 
+                    className="h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain" 
+                  />
+                </div>
             </div>
 
-            {/* Glassmorphism Info Card */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-4 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl">
-              <div className="flex items-center gap-3 text-white/95 px-2">
-                <div className="p-2 bg-white/20 rounded-xl"><Calendar className="w-5 h-5" /></div>
-                <div className="text-left">
-                  <div className="text-xs text-pink-200 font-medium">일정</div>
-                  <div className="font-bold text-sm sm:text-base">7. 17(금) - 7. 18(토)</div>
-                </div>
-              </div>
-              <div className="hidden sm:block w-px bg-white/20"></div>
-              <div className="flex items-center gap-3 text-white/95 px-2">
-                <div className="p-2 bg-white/20 rounded-xl"><Navigation className="w-5 h-5" /></div>
-                <div className="text-left">
-                  <div className="text-xs text-pink-200 font-medium">장소</div>
-                  <div className="font-bold text-sm sm:text-base">YBM 연수원</div>
-                </div>
-              </div>
-            </div>
+            {/* Glassmorphism Info Card (헤더 안에서 제거 - 아래로 이동하거나 삭제) */}
           </div>
         </div>
       </header>
 
-      {/* 2. BENTO WIDGETS */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 mb-12">
+      {/* 2. BENTO WIDGETS (헤더 배경 밖으로 완전히 내림) */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12 bg-[#FFF5F7]">
+        
+        {/* 상단에서 옮겨온 정보 카드 (선택 사항: 위젯들 바로 위에 배치) */}
+        <div className="flex justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm">
+                <div className="flex items-center gap-3 text-rose-900 px-4">
+                <div className="p-2 bg-rose-100 rounded-xl"><Calendar className="w-5 h-5 text-rose-500" /></div>
+                <div className="text-left">
+                    <div className="text-xs text-rose-400 font-medium">일정</div>
+                    <div className="font-bold text-sm sm:text-base">7. 17(금) - 7. 18(토)</div>
+                </div>
+                </div>
+                <div className="hidden sm:block w-px bg-rose-200"></div>
+                <div className="flex items-center gap-3 text-rose-900 px-4">
+                <div className="p-2 bg-rose-100 rounded-xl"><Navigation className="w-5 h-5 text-rose-500" /></div>
+                <div className="text-left">
+                    <div className="text-xs text-rose-400 font-medium">장소</div>
+                    <div className="font-bold text-sm sm:text-base">YBM 연수원</div>
+                </div>
+                </div>
+            </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Widget 1: 핵심 공지 (Red/Rose Theme) */}
