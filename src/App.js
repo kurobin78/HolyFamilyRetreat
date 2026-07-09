@@ -107,12 +107,12 @@ export default function App() {
             
             {/* 메인 타이틀 이미지 영역 */}
             <div className="flex justify-center mb-8">
-              <div className="relative flex items-center justify-center transform hover:scale-105 transition-transform duration-500">
-                {/* mix-blend-multiply를 사용하여 이미지의 하얀색 배경을 투명하게 만듦 */}
+              {/* 🚨 수정된 부분: mix-blend-multiply를 애니메이션이 있는 부모 div로 이동시켰습니다! */}
+              <div className="relative flex items-center justify-center transform hover:scale-105 transition-transform duration-500 mix-blend-multiply">
                 <img 
                   src="image_8171fd.png" 
                   alt="거룩한 家 온가족 수련회" 
-                  className="relative z-10 h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain mix-blend-multiply" 
+                  className="h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain" 
                 />
               </div>
             </div>
