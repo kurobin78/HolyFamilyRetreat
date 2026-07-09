@@ -92,7 +92,7 @@ export default function App() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiLz48L3N2Zz4=')]"></div>
 
         {/* 세움교회 CI (좌측 상단 고정) */}
-        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-200/50 via-rose-100/50 to-[#FFF5F7]"></div>
           <img 
             src="image_7f3404.png" 
             alt="세움교회 CI" 
