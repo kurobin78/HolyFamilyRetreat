@@ -239,7 +239,7 @@ export default function App() {
 
           {/* 사진 올리기 QR 링크 (배경 제거 & 클릭 이동) */}
           <a 
-            href="https://seumkmc.quickconnect.to/mo/request/4wUHTbjrt" 
+            href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1" 
             target="_blank" 
             rel="noopener noreferrer"
             className="shrink-0 group relative flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
