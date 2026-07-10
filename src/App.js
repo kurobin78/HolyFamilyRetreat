@@ -214,8 +214,14 @@ export default function App() {
       {/* 3. MAIN TIMELINE */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
-        {/* 시간표 상단 헤더: 탭(좌측) + 사진 올리기 QR(우측) */}
-        <div className="flex flex-col-reverse sm:flex-row justify-between items-center sm:items-end gap-6 mb-8">
+       {/* 사진 올리기 영역 */}
+<div className="flex justify-center mb-8">
+  ...
+</div>
+
+{/* 날짜 탭 */}
+<div className="mb-8">
+  <div className="flex w-full p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50">
           
           {/* iOS Style Segmented Control Tabs */}
           <div className="flex w-full sm:w-[400px] p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative">
@@ -237,23 +243,45 @@ export default function App() {
             </button>
           </div>
 
-          {/* 사진 올리기 QR 링크 (배경 제거 & 클릭 이동) */}
-          <a 
-            href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="shrink-0 group relative flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
-            title="사진 올리기 (클릭)"
-          >
-            {/* 마우스 오버 시 뒤에 나타나는 은은한 후광 효과 */}
-            <div className="absolute inset-0 bg-rose-300/20 rounded-3xl blur-xl group-hover:bg-rose-400/30 transition-colors"></div>
-            
-            <img 
-              src="거룩한가.png" 
-              alt="사진 올리기 QR" 
-              className="relative h-28 sm:h-36 w-auto object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity" 
-            />
-          </a>
+          {/* 사진 올리기 버튼 */}
+<a
+  href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    shrink-0
+    group
+    flex
+    flex-col
+    items-center
+    justify-center
+    gap-2
+    px-8
+    py-6
+    rounded-3xl
+    bg-gradient-to-br
+    from-rose-400
+    via-pink-500
+    to-fuchsia-500
+    text-white
+    shadow-xl
+    shadow-pink-200
+    hover:scale-105
+    hover:-translate-y-1
+    transition-all
+    duration-300
+  "
+>
+  <Camera className="w-10 h-10" />
+
+  <span className="text-xl font-extrabold tracking-tight">
+    사진 올리기
+  </span>
+
+  <span className="text-xs text-white/80">
+    추억을 함께 나눠주세요
+  </span>
+</a>
 
         </div>
 
