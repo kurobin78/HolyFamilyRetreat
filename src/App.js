@@ -1,260 +1,210 @@
-import React, { useState, useEffect } from 'react';
-import { Clock, MapPin, Bus, Utensils, Moon, Users, Sun, Speaker, BookOpen, Music, Heart, Mic, Camera, Tent, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  Calendar, Clock, MapPin, Users, Sun, Moon, Bus, 
+  Utensils, Music, Heart, Info, Sparkles, Tent, 
+  Droplets, ChevronRight, Camera, BookOpen, Navigation
+} from 'lucide-react';
 
 const scheduleData = {
   day1: [
-    { time: '13:30', title: '출발 준비 및 탑승', type: 'bus', desc: '세움교회 1층 로비 집결', icon: <Bus className="w-5 h-5" /> },
-    { time: '14:00', title: '화성으로 이동', type: 'move', desc: '바울버스 & 1,2호차 전세버스', icon: <MapPin className="w-5 h-5" /> },
-    { time: '15:30', title: '도착 및 짐풀기', type: 'normal', desc: '숙소 배정 및 오리엔테이션', icon: <Tent className="w-5 h-5" /> },
-    { time: '16:00', title: '부서별 특별 프로그램', type: 'special', desc: '어린이부, 중고등부, 청년부, 장년부', icon: <Users className="w-5 h-5" /> },
-    { time: '18:00', title: '저녁 식사', type: 'meal', desc: '연수원 식당 (지하 1층)', icon: <Utensils className="w-5 h-5" /> },
-    { time: '19:30', title: '여는 예배', type: 'worship', desc: '말씀: 김현수 담임목사', icon: <Speaker className="w-5 h-5" /> },
-    { time: '21:00', title: '세움가족 레크레이션', type: 'fun', desc: '웃음꽃 피는 교제 시간', icon: <Heart className="w-5 h-5" /> },
-    { time: '22:30', title: '취침 및 휴식', type: 'rest', desc: '내일을 위한 충전', icon: <Moon className="w-5 h-5" /> }
+    { time: "08:00 - 09:20", title: "선발대 출발 및 준비", location: "목동성전 → YBM", type: "move", desc: "잔여 물품 운반 및 수련회 장소 세팅", manager: "김인수 목사, 나상국 전도사" },
+    { time: "09:20 - 12:00", title: "집합 및 출발", location: "목동성전", type: "move", desc: "인원 확인, 출발 기도 후 전세버스 탑승", manager: "강진영 전도사 등" },
+    { time: "12:00 - 13:30", title: "도착 및 점심식사", location: "YBM 지하1층 식당", type: "meal", desc: "명찰/티셔츠 배부, 식당으로 질서 있게 이동 후 식사", manager: "접수 담당자" },
+    { time: "13:30 - 14:00", title: "개회예배 및 OT", location: "3층 대강의실", type: "worship", desc: "일정 설명 및 특별사항 전달", manager: "정성수 목사" },
+    { time: "14:00 - 17:30", title: "물놀이 및 수목원 방문", location: "족구장/수목원", type: "activity", desc: "온 가족 물놀이(에어바운스) 또는 물향기 수목원 방문", manager: "김인수 목사 등" },
+    { time: "17:30 - 18:00", title: "샤워 및 숙소 정리", location: "각 숙소", type: "rest", desc: "16:00부터 방 체크인. 미배정자 지정 호실 안내", manager: "강진영 전도사" },
+    { time: "18:00 - 19:00", title: "저녁식사", location: "지하 1층 식당", type: "meal", desc: "개별 식사 진행", manager: "-" },
+    { time: "19:00 - 19:30", title: "가족 및 단체 사진촬영", location: "3층 대강의실 포토존", type: "camera", desc: "포토존에서 가족/단체 사진 촬영", manager: "김윤영 권사" },
+    { time: "19:30 - 21:30", title: "거룩한 家 저녁 집회", location: "3층 대강의실", type: "worship", desc: "찬양, 기도, 말씀선포, 가정 언약식", manager: "이학성 담임목사" },
+    { time: "21:30 - 22:00", title: "친교의 시간 (야식)", location: "대강의실/로비", type: "meal", desc: "부서/가족별 야식 제공 및 교제", manager: "청장년부" },
+    { time: "22:00 - ", title: "취침", location: "개별숙소", type: "rest", desc: "어린이 12시 이전 취침 권장", manager: "각 교역자" }
   ],
   day2: [
-    { time: '07:30', title: '기상 및 아침 식사', type: 'meal', desc: '연수원 식당 (지하 1층)', icon: <Sun className="w-5 h-5" /> },
-    { time: '09:00', title: '숙소 체크아웃', type: 'normal', desc: '짐 정리 후 강당 집결', icon: <Tent className="w-5 h-5" /> },
-    { time: '09:30', title: '아침 경건회', type: 'worship', desc: '찬양과 기도', icon: <Music className="w-5 h-5" /> },
-    { time: '10:30', title: '부서별 오전 활동', type: 'special', desc: '각 부서별 장소에서 진행', icon: <Users className="w-5 h-5" /> },
-    { time: '12:00', title: '점심 식사', type: 'meal', desc: '마지막 만찬', icon: <Utensils className="w-5 h-5" /> },
-    { time: '13:00', title: '닫는 예배 및 시상식', type: 'worship', desc: '수련회 마무리', icon: <Star className="w-5 h-5" /> },
-    { time: '14:30', title: '단체 사진 촬영', type: 'fun', desc: '아쉬움을 뒤로하고', icon: <Camera className="w-5 h-5" /> },
-    { time: '15:00', title: '교회로 출발', type: 'move', desc: '안전하게 귀가', icon: <Bus className="w-5 h-5" /> }
+    { time: "07:00 - 08:00", title: "기상 및 아침식사", location: "지하1층 식당", type: "meal", desc: "선착순 라면 제공 (07:30까지)", manager: "-" },
+    { time: "08:00 - 08:40", title: "가정별/그룹별 QT", location: "개별숙소", type: "worship", desc: "말씀 카드 묵상 (저수지 산책 가능)", manager: "각 부장/속장" },
+    { time: "08:40 - 09:30", title: "숙소 및 개별 짐정리", location: "개별숙소 → 3층", type: "rest", desc: "체크아웃 09:00. 짐 챙겨서 대강의실로", manager: "개별" },
+    { time: "09:30 - 11:30", title: "부서별 프로그램", location: "지정 장소", type: "activity", desc: "각 부서별 맞춤형 특별 프로그램 진행", manager: "부서 담당자" },
+    { time: "11:30 - 12:00", title: "폐회예배", location: "3층 대강의실", type: "worship", desc: "수련회 마무리 은혜의 시간", manager: "정성수 목사" },
+    { time: "12:00 - 13:30", title: "점심식사", location: "지하1층 식당", type: "meal", desc: "뒷정리 인원 먼저 식사 후 자유 시간", manager: "-" },
+    { time: "13:30 - 14:00", title: "뒷정리", location: "대강의실 등", type: "move", desc: "악기, 비품 정리 및 차량 적재", manager: "남성 및 담당자" },
+    { time: "14:00 - 16:00", title: "교회로 출발", location: "목동성전으로", type: "move", desc: "안전하게 버스/승합차 탑승 후 귀가", manager: "김인수 목사 등" }
   ]
 };
 
+const programsData = [
+  { group: "청장년/장년부", location: "대강의실", title: "크라운 재정 강의 & 나눔", leader: "윤근수 장로", color: "from-rose-400 to-pink-500", shadow: "shadow-pink-200" },
+  { group: "청년부", location: "카페 및 로비", title: "신앙과 미래 생산적 토크", leader: "이소연 청년", color: "from-purple-400 to-fuchsia-500", shadow: "shadow-fuchsia-200" },
+  { group: "중고등부", location: "소강의실 7", title: "출애굽기 리얼 스토리", leader: "나상국 전도사", color: "from-amber-400 to-orange-500", shadow: "shadow-orange-200" },
+  { group: "어린이부", location: "소강의실 6", title: "놀라운 성막 이야기", leader: "강진영 전도사", color: "from-emerald-400 to-teal-500", shadow: "shadow-teal-200" }
+];
+
+const getTypeStyles = (type) => {
+  switch (type) {
+    case 'move': return { 
+      color: 'text-rose-600', bg: 'bg-rose-100', border: 'border-rose-200',
+      icon: Bus, gradient: 'from-rose-50 to-white', line: 'bg-rose-400'
+    };
+    case 'meal': return { 
+      color: 'text-amber-600', bg: 'bg-amber-100', border: 'border-amber-200',
+      icon: Utensils, gradient: 'from-amber-50 to-white', line: 'bg-amber-400'
+    };
+    case 'worship': return { 
+      color: 'text-fuchsia-600', bg: 'bg-fuchsia-100', border: 'border-fuchsia-200',
+      icon: Heart, gradient: 'from-fuchsia-50 to-white', line: 'bg-fuchsia-400'
+    };
+    case 'activity': return { 
+      color: 'text-emerald-600', bg: 'bg-emerald-100', border: 'border-emerald-200',
+      icon: StarIcon, gradient: 'from-emerald-50 to-white', line: 'bg-emerald-400'
+    };
+    case 'camera': return { 
+      color: 'text-pink-600', bg: 'bg-pink-100', border: 'border-pink-200',
+      icon: Camera, gradient: 'from-pink-50 to-white', line: 'bg-pink-400'
+    };
+    case 'rest': return { 
+      color: 'text-slate-500', bg: 'bg-slate-100', border: 'border-slate-200',
+      icon: Moon, gradient: 'from-slate-50 to-white', line: 'bg-slate-400'
+    };
+    default: return { 
+      color: 'text-gray-500', bg: 'bg-gray-100', border: 'border-gray-200',
+      icon: Clock, gradient: 'from-gray-50 to-white', line: 'bg-gray-400'
+    };
+  }
+};
+
+const StarIcon = ({className}) => <Sparkles className={className} />;
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('day1');
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const getEventStyle = (type) => {
-    switch(type) {
-      case 'bus': case 'move': 
-        return 'bg-pink-100/50 border-pink-200 text-pink-700 shadow-sm';
-      case 'meal': 
-        return 'bg-orange-50 border-orange-100 text-orange-600';
-      case 'worship': 
-        return 'bg-rose-50 border-rose-200 text-rose-700 shadow-sm';
-      case 'special':
-        return 'bg-purple-50 border-purple-100 text-purple-600';
-      case 'fun':
-        return 'bg-coral-50 border-coral-100 text-rose-500';
-      case 'rest':
-        return 'bg-slate-50 border-slate-200 text-slate-500';
-      default: 
-        return 'bg-white border-slate-100 text-slate-700';
-    }
-  };
-
-  const getIconBg = (type) => {
-    switch(type) {
-      case 'bus': case 'move': return 'bg-pink-100 text-pink-600';
-      case 'meal': return 'bg-orange-100 text-orange-500';
-      case 'worship': return 'bg-rose-100 text-rose-600';
-      case 'special': return 'bg-purple-100 text-purple-500';
-      case 'fun': return 'bg-coral-100 text-rose-500';
-      case 'rest': return 'bg-slate-200 text-slate-600';
-      default: return 'bg-slate-100 text-slate-500';
-    }
-  };
 
   return (
-    <div className="min-h-screen bg-[#FFF5F7] font-sans selection:bg-rose-200">
-      
-      {/* 1. HERO HEADER */}
-      <header className="relative w-full overflow-hidden bg-rose-50/50 pb-12 pt-16 h-[380px] lg:h-[350px]">
-        {/* 배경 그라데이션 (노을빛 피치 & 코랄) */}
+    <div className="min-h-screen bg-[#FFF5F7] font-sans selection:bg-pink-300 selection:text-pink-900 pb-20">
+      {/* 1. HERO SECTION : 화사한 피치/코랄 톤 비주얼 */}
+      <header className="relative w-full h-[400px] lg:h-[350px] overflow-hidden bg-rose-50/50 pb-8 pt-16">
+        
+        {/* 따뜻한 노을빛 피치 & 코랄 그라데이션 배경 */}
         <div className="absolute inset-0 bg-gradient-to-b from-orange-200/50 via-rose-100/50 to-[#FFF5F7]"></div>
         
-        {/* 장식용 도트 배경 */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #000 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        {/* Subtle grid pattern overlay */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjUwLDIwNCwyMTUsMC4yKSIvPjwvc3ZnPg==')]"></div>
 
-        {/* 상단 좌측: 교회 로고 & 사진 올리기 버튼 */}
-        <div className="absolute top-6 left-6 z-20 flex flex-col items-center gap-3">
-          {/* 세움교회 로고 (CI) */}
+        {/* 세움교회 CI (좌측 상단 고정) */}
+        <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
           <img 
-            src="image_81806a.png" 
-            alt="세움교회" 
-            className="h-10 w-auto opacity-90 drop-shadow-sm mix-blend-multiply transition-transform duration-300 hover:scale-105" 
+            src="image_7f3404.png" 
+            alt="세움교회 CI" 
+            className="h-[70px] sm:h-[80px] md:h-[100px] w-auto object-contain drop-shadow-md" 
           />
-          
-          {/* 사진 올리기 버튼 */}
-          <a 
-            href="https://seumkmc.quickconnect.to/mo/request/4wUHTbjrt" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-1.5 bg-white/70 hover:bg-white/90 text-rose-700 text-xs font-semibold rounded-full shadow-sm hover:shadow transition-all duration-300 backdrop-blur-sm border border-white/50"
-            title="수련회 사진 올리기"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-image-up">
-              <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/>
-              <path d="m14 19.5 3-3 3 3"/>
-              <path d="M17 22v-5.5"/>
-              <circle cx="9" cy="9" r="2"/>
-            </svg>
-            사진 올리기
-          </a>
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center mt-4">
+        {/* Hero Content */}
+        <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center">
           
-          {/* 로고 영역 (텍스트 대신 이미지 사용) */}
-          <div className="mb-4 relative group">
-            {/* 후광 효과 */}
-            <div className="absolute inset-0 bg-white/40 blur-3xl rounded-full scale-110 group-hover:bg-white/60 transition-all duration-500"></div>
+          <div className="animate-fade-in-up flex flex-col items-center mt-8 md:mt-2">
             
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 relative z-10">
-              {/* 수련회 로고 이미지 */}
-              <img 
-                src="image_8171fd.png" 
-                alt="거룩한 가" 
-                className="h-32 md:h-40 w-auto object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" 
-              />
+            {/* 메인 타이틀 이미지 영역 */}
+            <div className="flex justify-center mb-8 relative">
+                {/* 배경을 투명하게 만드는 애니메이션 컨테이너 */}
+                <div className="relative flex items-center justify-center mix-blend-multiply transform hover:scale-105 transition-transform duration-500">
+                  <img 
+                    src="image_8171fd.png" 
+                    alt="거룩한 家 온가족 수련회" 
+                    className="h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain" 
+                  />
+                </div>
             </div>
-          </div>
-          
-          <p className="text-[15px] sm:text-base text-rose-800/80 font-medium tracking-wide mb-6">
-            2026. 07. 17(금) - 07. 18(토)
-          </p>
 
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/50 shadow-sm text-rose-800">
-              <Clock className="w-4 h-4 text-rose-500" />
-              <span className="text-sm font-semibold">1박 2일</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/50 shadow-sm text-rose-800">
-              <MapPin className="w-4 h-4 text-rose-500" />
-              <span className="text-sm font-semibold">화성 YBM연수원</span>
-            </div>
+            {/* Glassmorphism Info Card (헤더 안에서 제거 - 아래로 이동하거나 삭제) */}
           </div>
         </div>
       </header>
 
-      {/* 2. QUICK INFO WIDGETS (배경 아래로 내림) */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+      {/* 2. BENTO WIDGETS (헤더 배경 밖으로 완전히 내림) */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12 bg-[#FFF5F7]">
+        
+        {/* 상단에서 옮겨온 정보 카드 (선택 사항: 위젯들 바로 위에 배치) */}
+        <div className="flex justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm">
+                <div className="flex items-center gap-3 text-rose-900 px-4">
+                <div className="p-2 bg-rose-100 rounded-xl"><Calendar className="w-5 h-5 text-rose-500" /></div>
+                <div className="text-left">
+                    <div className="text-xs text-rose-400 font-medium">일정</div>
+                    <div className="font-bold text-sm sm:text-base">7. 17(금) - 7. 18(토)</div>
+                </div>
+                </div>
+                <div className="hidden sm:block w-px bg-rose-200"></div>
+                <div className="flex items-center gap-3 text-rose-900 px-4">
+                <div className="p-2 bg-rose-100 rounded-xl"><Navigation className="w-5 h-5 text-rose-500" /></div>
+                <div className="text-left">
+                    <div className="text-xs text-rose-400 font-medium">장소</div>
+                    <div className="font-bold text-sm sm:text-base">YBM 연수원</div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          {/* Widget 1: 필독 공지 */}
-          <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(244,114,182,0.1)] transition-all duration-300">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-rose-50 rounded-bl-full opacity-50 -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
-            <div className="flex items-center gap-3 mb-4 relative z-10">
-              <div className="p-2.5 bg-rose-50 text-rose-600 rounded-xl">
-                <Speaker className="w-5 h-5" />
+          {/* Widget 1: 핵심 공지 (Red/Rose Theme) */}
+          <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(225,29,72,0.08)] transition-all duration-300 group overflow-hidden relative">
+            <div className="absolute -right-8 -top-8 w-32 h-32 bg-rose-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-extrabold text-lg text-slate-800 flex items-center gap-2">
+                  <span className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center"><Info className="w-4 h-4"/></span>
+                  필독 공지사항
+                </h3>
               </div>
-              <h3 className="font-bold text-slate-800 text-lg">필독 공지사항</h3>
+              <ul className="space-y-3 text-sm font-medium text-slate-600">
+                <li className="flex gap-3 items-start"><div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0 shadow-[0_0_8px_rgba(251,113,133,0.8)]"></div><span><strong className="text-slate-800">숙소 키:</strong> 첫날 16:00 분배</span></li>
+                <li className="flex gap-3 items-start"><div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0 shadow-[0_0_8px_rgba(251,113,133,0.8)]"></div><span><strong className="text-slate-800">미배정자:</strong> 남 315호 / 여 215호</span></li>
+                <li className="flex gap-3 items-start"><div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0 shadow-[0_0_8px_rgba(251,113,133,0.8)]"></div><span><strong className="text-slate-800">체크아웃:</strong> 둘째 날 09:00</span></li>
+              </ul>
             </div>
-            <ul className="space-y-3 relative z-10">
-              <li className="flex items-center gap-2 text-sm text-slate-600">
-                <div className="w-1.5 h-1.5 rounded-full bg-rose-400"></div>
-                <strong>숙소 키:</strong> 첫날 16:00 분배
-              </li>
-              <li className="flex items-center gap-2 text-sm text-slate-600">
-                <div className="w-1.5 h-1.5 rounded-full bg-rose-400"></div>
-                <strong>미배정자:</strong> 남 315호 / 여 215호
-              </li>
-              <li className="flex items-center gap-2 text-sm text-slate-600">
-                <div className="w-1.5 h-1.5 rounded-full bg-rose-400"></div>
-                <strong>체크아웃:</strong> 둘째 날 09:00
-              </li>
-            </ul>
           </div>
 
-          {/* Widget 2: 차량 탑승 */}
-          <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative overflow-hidden group hover:shadow-[0_8px_30px_rgba(244,114,182,0.1)] transition-all duration-300">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full opacity-50 -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
-            <div className="flex items-center gap-3 mb-4 relative z-10">
-              <div className="p-2.5 bg-purple-50 text-purple-600 rounded-xl">
-                <Bus className="w-5 h-5" />
+          {/* Widget 2: 차량 안내 (Purple/Fuchsia Theme) */}
+          <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(192,38,211,0.08)] transition-all duration-300 group overflow-hidden relative">
+            <div className="absolute -right-8 -top-8 w-32 h-32 bg-fuchsia-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-extrabold text-lg text-slate-800 flex items-center gap-2">
+                  <span className="w-8 h-8 rounded-full bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center"><Bus className="w-4 h-4"/></span>
+                  차량 탑승
+                </h3>
               </div>
-              <h3 className="font-bold text-slate-800 text-lg">차량 탑승</h3>
-            </div>
-            <div className="space-y-2 relative z-10">
-              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-50/50 transition-colors">
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-100 text-purple-700 font-bold text-sm">1</span>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-slate-800">1호차 (전세버스)</p>
-                  <p className="text-xs text-slate-500">어린이부 및 학부모</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
+                  <div className="w-10 h-10 rounded-xl bg-fuchsia-500 text-white font-black flex items-center justify-center shadow-md shadow-fuchsia-200">1</div>
+                  <div><p className="text-sm font-bold text-slate-800">1호차 (전세버스)</p><p className="text-xs text-slate-500 font-medium">어린이부 및 학부모</p></div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-50/50 transition-colors">
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-100 text-purple-700 font-bold text-sm">2</span>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-slate-800">2호차 (전세버스)</p>
-                  <p className="text-xs text-slate-500">중고등부 및 학부모</p>
+                <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500 text-white font-black flex items-center justify-center shadow-md shadow-purple-200">2</div>
+                  <div><p className="text-sm font-bold text-slate-800">2호차 (전세버스)</p><p className="text-xs text-slate-500 font-medium">중고등부 및 학부모</p></div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-rose-50/50 transition-colors">
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-rose-100 text-rose-700 font-bold text-sm">바</span>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-slate-800">바울버스</p>
-                  <p className="text-xs text-slate-500">장년층</p>
+                <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
+                  <div className="w-10 h-10 rounded-xl bg-pink-500 text-white font-black flex items-center justify-center shadow-md shadow-pink-200">바</div>
+                  <div><p className="text-sm font-bold text-slate-800">바울버스</p><p className="text-xs text-slate-500 font-medium">장년층</p></div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Widget 3: 부서별 특별 프로그램 */}
-          <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative overflow-hidden md:col-span-1 sm:col-span-2">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="p-2.5 bg-pink-50 text-pink-600 rounded-xl">
-                <Users className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-slate-800 text-lg">부서별 특별 프로그램</h3>
-            </div>
-            
+          {/* Widget 3: 부서별 프로그램 하이라이트 (Multi Theme) */}
+          <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(244,114,182,0.1)] transition-all duration-300">
+            <h3 className="font-extrabold text-lg text-slate-800 flex items-center gap-2 mb-4">
+              <span className="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center"><Users className="w-4 h-4"/></span>
+              부서별 특별 프로그램
+            </h3>
             <div className="grid grid-cols-2 gap-3">
-              {/* 장년부 */}
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 p-3.5 text-white shadow-sm hover:shadow-md transition-all cursor-default group">
-                <div className="absolute right-[-10px] bottom-[-10px] opacity-20 transform group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-16 h-16" />
+              {programsData.map((prog, idx) => (
+                <div key={idx} className={`p-3 rounded-2xl bg-gradient-to-br ${prog.color} text-white shadow-lg ${prog.shadow} hover:-translate-y-1 transition-transform cursor-default relative overflow-hidden`}>
+                  <div className="absolute -right-2 -bottom-2 opacity-20"><BookOpen className="w-12 h-12"/></div>
+                  <div className="relative z-10">
+                    <p className="text-[10px] font-bold bg-white/20 inline-block px-1.5 py-0.5 rounded backdrop-blur-sm mb-1">{prog.group}</p>
+                    <p className="text-sm font-bold leading-tight line-clamp-2">{prog.title}</p>
+                  </div>
                 </div>
-                <div className="relative z-10">
-                  <span className="inline-block px-2 py-0.5 bg-white/20 rounded text-[10px] font-bold mb-1.5 backdrop-blur-sm">청장년/장년부</span>
-                  <p className="font-bold text-sm leading-tight">크라운 재정 강의 &<br/>나눔</p>
-                </div>
-              </div>
-
-              {/* 청년부 */}
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-purple-400 to-indigo-400 p-3.5 text-white shadow-sm hover:shadow-md transition-all cursor-default group">
-                <div className="absolute right-[-10px] bottom-[-10px] opacity-20 transform group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-16 h-16" />
-                </div>
-                <div className="relative z-10">
-                  <span className="inline-block px-2 py-0.5 bg-white/20 rounded text-[10px] font-bold mb-1.5 backdrop-blur-sm">청년부</span>
-                  <p className="font-bold text-sm leading-tight">신앙과 미래 생산적 토크</p>
-                </div>
-              </div>
-
-              {/* 중고등부 */}
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 p-3.5 text-white shadow-sm hover:shadow-md transition-all cursor-default group">
-                <div className="absolute right-[-10px] bottom-[-10px] opacity-20 transform group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-16 h-16" />
-                </div>
-                <div className="relative z-10">
-                  <span className="inline-block px-2 py-0.5 bg-white/20 rounded text-[10px] font-bold mb-1.5 backdrop-blur-sm">중고등부</span>
-                  <p className="font-bold text-sm leading-tight">출애굽기 리얼 스토리</p>
-                </div>
-              </div>
-
-              {/* 어린이부 */}
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 p-3.5 text-white shadow-sm hover:shadow-md transition-all cursor-default group">
-                <div className="absolute right-[-10px] bottom-[-10px] opacity-20 transform group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-16 h-16" />
-                </div>
-                <div className="relative z-10">
-                  <span className="inline-block px-2 py-0.5 bg-white/20 rounded text-[10px] font-bold mb-1.5 backdrop-blur-sm">어린이부</span>
-                  <p className="font-bold text-sm leading-tight">놀라운 성막 이야기</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -262,10 +212,10 @@ export default function App() {
       </div>
 
       {/* 3. MAIN TIMELINE */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
-        {/* 시간표 상단 헤더: 탭만 남김 (가운데 정렬) */}
-        <div className="flex justify-center sm:justify-start mb-8">
+        {/* 시간표 상단 헤더: 탭(좌측) + 사진 올리기 QR(우측) */}
+        <div className="flex flex-col-reverse sm:flex-row justify-between items-center sm:items-end gap-6 mb-8">
           
           {/* iOS Style Segmented Control Tabs */}
           <div className="flex w-full sm:w-[400px] p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative">
@@ -287,55 +237,98 @@ export default function App() {
             </button>
           </div>
 
+          {/* 사진 올리기 QR 링크 (배경 제거 & 클릭 이동) */}
+          <a 
+            href="https://seumkmc.quickconnect.to/mo/request/4wUHTbjrt" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="shrink-0 group relative flex flex-col items-center justify-center hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
+            title="사진 올리기 (클릭)"
+          >
+            {/* 마우스 오버 시 뒤에 나타나는 은은한 후광 효과 */}
+            <div className="absolute inset-0 bg-rose-300/20 rounded-3xl blur-xl group-hover:bg-rose-400/30 transition-colors"></div>
+            
+            <img 
+              src="거룩한가.png" 
+              alt="사진 올리기 QR" 
+              className="relative h-28 sm:h-36 w-auto object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity" 
+            />
+          </a>
+
         </div>
 
         {/* Timeline List */}
         <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 shadow-[0_20px_50px_rgba(244,114,182,0.05)] border border-pink-50">
-          <div className="relative">
-            {/* 세로 타임라인 선 */}
-            <div className="absolute left-[27px] sm:left-[39px] top-6 bottom-6 w-[2px] bg-pink-100 rounded-full"></div>
+          <div className="relative border-l-[3px] border-pink-50 ml-4 sm:ml-6 space-y-8 sm:space-y-12">
             
-            <div className="space-y-8 sm:space-y-10">
-              {scheduleData[activeTab].map((item, index) => (
-                <div key={index} className="relative flex items-start group">
-                  
-                  {/* 시간 뱃지 (아이콘) */}
-                  <div className={`relative z-10 flex items-center justify-center w-[56px] h-[56px] sm:w-[80px] sm:h-[80px] rounded-2xl shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-sm border-4 border-white ${getIconBg(item.type)}`}>
-                    {item.icon}
+            {scheduleData[activeTab].map((item, index) => {
+              const styles = getTypeStyles(item.type);
+              const Icon = styles.icon;
+              
+              return (
+                <div key={index} className="relative pl-8 sm:pl-12 group">
+                  {/* Glowing Timeline Node */}
+                  <div className={`absolute -left-[19px] sm:-left-[19px] top-1 w-9 h-9 rounded-full flex items-center justify-center border-[3px] border-white ${styles.bg} ${styles.color} shadow-sm group-hover:scale-125 transition-transform duration-300 z-10`}>
+                    <Icon className="w-4 h-4" />
                   </div>
                   
-                  {/* 내용 */}
-                  <div className="ml-5 sm:ml-8 flex-1 pt-1.5 sm:pt-3">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-1">
-                      <span className="text-rose-600 font-black text-lg sm:text-xl tracking-tight">{item.time}</span>
-                      <div className="hidden sm:block w-1 h-1 rounded-full bg-slate-300"></div>
-                      <h4 className="text-slate-800 font-bold text-base sm:text-lg">{item.title}</h4>
-                    </div>
+                  {/* Premium Card Design */}
+                  <div className={`relative bg-white rounded-3xl p-5 sm:p-6 border border-pink-50/50 shadow-sm hover:shadow-xl hover:shadow-pink-100/50 transition-all duration-300 group-hover:-translate-y-1 overflow-hidden`}>
                     
-                    {/* 설명 태그 박스 */}
-                    {item.desc && (
-                      <div className={`inline-block px-3.5 py-1.5 rounded-lg text-[13px] font-semibold mt-2 border ${getEventStyle(item.type)} transition-colors duration-300`}>
-                        {item.desc}
-                      </div>
-                    )}
-                  </div>
+                    {/* Left Accent Line */}
+                    <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${styles.line}`}></div>
+                    
+                    {/* Background Icon Watermark */}
+                    <div className={`absolute -right-4 -bottom-4 opacity-[0.03] transform group-hover:scale-110 transition-transform duration-500`}>
+                      <Icon className="w-32 h-32" />
+                    </div>
 
+                    <div className="relative z-10">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
+                          {item.title}
+                        </h3>
+                        <span className={`inline-flex font-bold items-center px-3 py-1.5 rounded-xl text-sm bg-slate-50 border border-slate-100 text-slate-600 whitespace-nowrap shadow-sm`}>
+                          <Clock className="w-4 h-4 mr-1.5 text-slate-400" />
+                          {item.time}
+                        </span>
+                      </div>
+                      
+                      <p className="text-slate-600 mb-5 leading-relaxed font-medium text-[15px] sm:text-base">
+                        {item.desc}
+                      </p>
+                      
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 text-sm font-semibold">
+                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg ${styles.bg} ${styles.color}`}>
+                          <MapPin className="w-4 h-4" />
+                          {item.location}
+                        </div>
+                        {item.manager && item.manager !== "-" && (
+                          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 text-slate-500 border border-slate-100">
+                            <Users className="w-4 h-4 text-slate-400" />
+                            인도/담당: {item.manager}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              );
+            })}
+            
+            {/* End of Timeline Indicator */}
+            <div className="relative pl-8 sm:pl-12 pt-4">
+              <div className="absolute -left-[11px] sm:-left-[11px] top-6 w-5 h-5 rounded-full border-[3px] border-white bg-pink-100 shadow-sm z-10"></div>
+              <div className="text-center bg-pink-50/50 rounded-2xl py-4 border border-pink-100 text-pink-400 font-bold text-sm">
+                {activeTab === 'day1' ? '첫째 날 일정이 모두 끝났습니다. 평안한 밤 되세요 🌙' : '모든 수련회 일정이 은혜 가운데 마쳤습니다 🙏'}
+              </div>
             </div>
+
           </div>
         </div>
       </main>
 
-      {/* FOOTER */}
-      <footer className="bg-white/80 border-t border-pink-100 py-10 mt-auto">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <img src="image_81806a.png" alt="세움교회" className="h-8 mx-auto mb-4 opacity-40 grayscale mix-blend-multiply" />
-          <p className="text-slate-400 text-sm font-medium">
-            © 2026 거룩한 뜻 세움교회. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
