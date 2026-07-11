@@ -14,7 +14,6 @@ const scheduleData = {
     { time: "14:00 - 17:30", title: "물놀이 및 수목원 방문", location: "족구장/수목원", type: "activity", desc: "온 가족 물놀이(에어바운스) 또는 물향기 수목원 방문", manager: "김인수 목사 등" },
     { time: "17:30 - 18:00", title: "샤워 및 숙소 정리", location: "각 숙소", type: "rest", desc: "16:00부터 방 체크인. 미배정자 지정 호실 안내", manager: "강진영 전도사" },
     { time: "18:00 - 19:00", title: "저녁식사", location: "지하 1층 식당", type: "meal", desc: "개별 식사 진행", manager: "-" },
-    { time: "19:00 - 19:30", title: "가족 및 단체 사진촬영", location: "3층 대강의실 포토존", type: "camera", desc: "포토존에서 가족/단체 사진 촬영", manager: "김윤영 권사" },
     { time: "19:30 - 21:30", title: "거룩한 家 저녁 집회", location: "3층 대강의실", type: "worship", desc: "찬양, 기도, 말씀선포, 가정 언약식", manager: "이학성 담임목사" },
     { time: "21:30 - 22:00", title: "친교의 시간 (야식)", location: "대강의실/로비", type: "meal", desc: "부서/가족별 야식 제공 및 교제", manager: "청장년부" },
     { time: "22:00 - ", title: "취침", location: "개별숙소", type: "rest", desc: "어린이 12시 이전 취침 권장", manager: "각 교역자" }
@@ -102,7 +101,6 @@ export default function App() {
             
             {/* 메인 타이틀 이미지 영역 */}
             <div className="flex justify-center mb-8 relative">
-                {/* 배경을 투명하게 만드는 애니메이션 컨테이너 */}
                 <div className="relative flex items-center justify-center mix-blend-multiply transform hover:scale-105 transition-transform duration-500">
                   <img 
                     src="image_8171fd.png" 
@@ -118,30 +116,59 @@ export default function App() {
       {/* 2. BENTO WIDGETS (헤더 배경 밖) */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12 bg-[#FFF5F7]">
         
-        {/* 상단 정보 카드 */}
-        <div className="flex justify-center mb-8">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm">
-                <div className="flex items-center gap-3 text-rose-900 px-4">
-                <div className="p-2 bg-rose-100 rounded-xl"><Calendar className="w-5 h-5 text-rose-500" /></div>
-                <div className="text-left">
-                    <div className="text-xs text-rose-400 font-medium">일정</div>
-                    <div className="font-bold text-sm sm:text-base">7. 17(금) - 7. 18(토)</div>
+        {/* =========================================
+            수정된 상단 정보 카드 (일정 / 장소 / 일정표)
+            모바일에서도 한 줄로 예쁘게 나오도록 수정 
+        ========================================= */}
+        <div className="flex justify-center mb-8 px-2">
+            <div className="flex flex-row items-center justify-center gap-2 sm:gap-6 p-3 sm:p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm w-full sm:w-auto overflow-x-auto">
+                
+                {/* 일정 */}
+                <div className="flex items-center gap-2 sm:gap-3 text-rose-900 shrink-0">
+                    <div className="p-1.5 sm:p-2 bg-rose-100 rounded-xl">
+                      <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500" />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-[10px] sm:text-xs text-rose-400 font-medium">일정</div>
+                        <div className="font-bold text-xs sm:text-base whitespace-nowrap">7. 17(금) - 7. 18(토)</div>
+                    </div>
                 </div>
+                
+                {/* 구분선 */}
+                <div className="w-px h-8 sm:h-10 bg-rose-200 shrink-0"></div>
+                
+                {/* 장소 */}
+                <div className="flex items-center gap-2 sm:gap-3 text-rose-900 shrink-0">
+                    <div className="p-1.5 sm:p-2 bg-rose-100 rounded-xl">
+                      <Navigation className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500" />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-[10px] sm:text-xs text-rose-400 font-medium">장소</div>
+                        <div className="font-bold text-xs sm:text-base whitespace-nowrap">YBM 연수원</div>
+                    </div>
                 </div>
-                <div className="hidden sm:block w-px bg-rose-200"></div>
-                <div className="flex items-center gap-3 text-rose-900 px-4">
-                <div className="p-2 bg-rose-100 rounded-xl"><Navigation className="w-5 h-5 text-rose-500" /></div>
-                <div className="text-left">
-                    <div className="text-xs text-rose-400 font-medium">장소</div>
-                    <div className="font-bold text-sm sm:text-base">YBM 연수원</div>
+
+                {/* 구분선 */}
+                <div className="w-px h-8 sm:h-10 bg-rose-200 shrink-0"></div>
+
+                {/* 일정표 다운로드/보기 버튼 (PDF 링크) */}
+                <div className="flex items-center shrink-0">
+                    <a 
+                        href="/schedule.pdf" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl shadow-md shadow-rose-200 transition-all hover:-translate-y-0.5 active:scale-95 font-bold text-xs sm:text-sm whitespace-nowrap"
+                    >
+                        <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
+                        일정표 보기
+                    </a>
                 </div>
-                </div>
+
             </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Widget 1: 핵심 공지 (Red/Rose Theme) */}
+          {/* Widget 1: 핵심 공지 */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(225,29,72,0.08)] transition-all duration-300 group overflow-hidden relative">
             <div className="absolute -right-8 -top-8 w-32 h-32 bg-rose-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
             <div className="relative z-10">
@@ -159,7 +186,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Widget 2: 차량 안내 (Purple/Fuchsia Theme) */}
+          {/* Widget 2: 차량 안내 */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(192,38,211,0.08)] transition-all duration-300 group overflow-hidden relative">
             <div className="absolute -right-8 -top-8 w-32 h-32 bg-fuchsia-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
             <div className="relative z-10">
@@ -186,7 +213,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Widget 3: 부서별 프로그램 하이라이트 (Multi Theme) */}
+          {/* Widget 3: 부서별 프로그램 하이라이트 */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(244,114,182,0.1)] transition-all duration-300">
             <h3 className="font-extrabold text-lg text-slate-800 flex items-center gap-2 mb-4">
               <span className="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center"><Users className="w-4 h-4"/></span>
@@ -211,7 +238,7 @@ export default function App() {
       {/* 3. MAIN TIMELINE */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
-        {/* [변경 적용] 중앙 정렬된 예쁜 그라데이션 형태의 사진 올리기 버튼 */}
+        {/* 사진 올리기 버튼 */}
         <div className="flex justify-center mb-8">
           <a
             href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1"
@@ -251,7 +278,7 @@ export default function App() {
           </a>
         </div>
 
-        {/* [변경 적용] 하단 타임라인 테이블 카드와 정확히 너비를 같이 맞춘 날짜 탭 바 */}
+        {/* 날짜 탭 바 */}
         <div className="mb-8">
           <div className="flex p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative w-full">
             <button
