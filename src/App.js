@@ -78,16 +78,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFF5F7] font-sans selection:bg-pink-300 selection:text-pink-900 pb-20">
-      {/* 1. HERO SECTION : 화사한 피치/코랄 톤 비주얼 */}
+      {/* 1. HERO SECTION */}
       <header className="relative w-full h-[400px] lg:h-[350px] overflow-hidden bg-rose-50/50 pb-8 pt-16">
-        
-        {/* 따뜻한 노을빛 피치 & 코랄 그라데이션 배경 */}
         <div className="absolute inset-0 bg-gradient-to-b from-orange-200/50 via-rose-100/50 to-[#FFF5F7]"></div>
-        
-        {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjUwLDIwNCwyMTUsMC4yKSIvPjwvc3ZnPg==')]"></div>
 
-        {/* 세움교회 CI (좌측 상단 고정) */}
+        {/* 세움교회 CI */}
         <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20">
           <img 
             src="image_7f3404.png" 
@@ -98,53 +94,45 @@ export default function App() {
 
         {/* Hero Content */}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center text-center">
-          
           <div className="animate-fade-in-up flex flex-col items-center mt-8 md:mt-2">
-            
-            {/* 메인 타이틀 이미지 영역 */}
             <div className="flex justify-center mb-8 relative">
-                {/* 배경을 투명하게 만드는 애니메이션 컨테이너 */}
-                <div className="relative flex items-center justify-center mix-blend-multiply transform hover:scale-105 transition-transform duration-500">
-                  <img 
-                    src="image_8171fd.png" 
-                    alt="거룩한 家 온가족 수련회" 
-                    className="h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain" 
-                  />
-                </div>
+              <div className="relative flex items-center justify-center mix-blend-multiply transform hover:scale-105 transition-transform duration-500">
+                <img 
+                  src="image_8171fd.png" 
+                  alt="거룩한 家 온가족 수련회" 
+                  className="h-[180px] sm:h-[220px] md:h-[250px] w-auto object-contain" 
+                />
+              </div>
             </div>
-
-            {/* Glassmorphism Info Card (헤더 안에서 제거 - 아래로 이동하거나 삭제) */}
           </div>
         </div>
       </header>
 
-      {/* 2. BENTO WIDGETS (헤더 배경 밖으로 완전히 내림) */}
+      {/* 2. BENTO WIDGETS */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12 bg-[#FFF5F7]">
-        
-        {/* 상단에서 옮겨온 정보 카드 (선택 사항: 위젯들 바로 위에 배치) */}
+        {/* 상단 정보 카드 */}
         <div className="flex justify-center mb-8">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm">
-                <div className="flex items-center gap-3 text-rose-900 px-4">
-                <div className="p-2 bg-rose-100 rounded-xl"><Calendar className="w-5 h-5 text-rose-500" /></div>
-                <div className="text-left">
-                    <div className="text-xs text-rose-400 font-medium">일정</div>
-                    <div className="font-bold text-sm sm:text-base">7. 17(금) - 7. 18(토)</div>
-                </div>
-                </div>
-                <div className="hidden sm:block w-px bg-rose-200"></div>
-                <div className="flex items-center gap-3 text-rose-900 px-4">
-                <div className="p-2 bg-rose-100 rounded-xl"><Navigation className="w-5 h-5 text-rose-500" /></div>
-                <div className="text-left">
-                    <div className="text-xs text-rose-400 font-medium">장소</div>
-                    <div className="font-bold text-sm sm:text-base">YBM 연수원</div>
-                </div>
-                </div>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm">
+            <div className="flex items-center gap-3 text-rose-900 px-4">
+              <div className="p-2 bg-rose-100 rounded-xl"><Calendar className="w-5 h-5 text-rose-500" /></div>
+              <div className="text-left">
+                <div className="text-xs text-rose-400 font-medium">일정</div>
+                <div className="font-bold text-sm sm:text-base">7. 17(금) - 7. 18(토)</div>
+              </div>
             </div>
+            <div className="hidden sm:block w-px bg-rose-200"></div>
+            <div className="flex items-center gap-3 text-rose-900 px-4">
+              <div className="p-2 bg-rose-100 rounded-xl"><Navigation className="w-5 h-5 text-rose-500" /></div>
+              <div className="text-left">
+                <div className="text-xs text-rose-400 font-medium">장소</div>
+                <div className="font-bold text-sm sm:text-base">YBM 연수원</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Widget 1: 핵심 공지 (Red/Rose Theme) */}
+          {/* Widget 1: 필독 공지사항 */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(225,29,72,0.08)] transition-all duration-300 group overflow-hidden relative">
             <div className="absolute -right-8 -top-8 w-32 h-32 bg-rose-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
             <div className="relative z-10">
@@ -162,7 +150,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Widget 2: 차량 안내 (Purple/Fuchsia Theme) */}
+          {/* Widget 2: 차량 탑승 */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(192,38,211,0.08)] transition-all duration-300 group overflow-hidden relative">
             <div className="absolute -right-8 -top-8 w-32 h-32 bg-fuchsia-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
             <div className="relative z-10">
@@ -189,7 +177,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Widget 3: 부서별 프로그램 하이라이트 (Multi Theme) */}
+          {/* Widget 3: 부서별 특별 프로그램 */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(244,114,182,0.1)] transition-all duration-300">
             <h3 className="font-extrabold text-lg text-slate-800 flex items-center gap-2 mb-4">
               <span className="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center"><Users className="w-4 h-4"/></span>
@@ -207,24 +195,16 @@ export default function App() {
               ))}
             </div>
           </div>
-
         </div>
       </div>
 
       {/* 3. MAIN TIMELINE */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         
-       {/* 사진 올리기 영역 */}
-<div className="flex justify-center mb-8">
-  ...
-</div>
-
-{/* 날짜 탭 */}
-<div className="mb-8">
-  <div className="flex w-full p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50">
-          
+        {/* 날짜 탭 및 사진 올리기 버튼 영역 수정 */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8">
           {/* iOS Style Segmented Control Tabs */}
-          <div className="flex w-full sm:w-[400px] p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative">
+          <div className="flex flex-1 p-1.5 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-pink-50 relative">
             <button
               onClick={() => setActiveTab('day1')}
               className={`flex-1 py-3.5 text-center font-bold text-[15px] rounded-xl transition-all duration-300 z-10 flex items-center justify-center gap-2 ${
@@ -244,45 +224,39 @@ export default function App() {
           </div>
 
           {/* 사진 올리기 버튼 */}
-<a
-  href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="
-    shrink-0
-    group
-    flex
-    flex-col
-    items-center
-    justify-center
-    gap-2
-    px-8
-    py-6
-    rounded-3xl
-    bg-gradient-to-br
-    from-rose-400
-    via-pink-500
-    to-fuchsia-500
-    text-white
-    shadow-xl
-    shadow-pink-200
-    hover:scale-105
-    hover:-translate-y-1
-    transition-all
-    duration-300
-  "
->
-  <Camera className="w-10 h-10" />
-
-  <span className="text-xl font-extrabold tracking-tight">
-    사진 올리기
-  </span>
-
-  <span className="text-xs text-white/80">
-    추억을 함께 나눠주세요
-  </span>
-</a>
-
+          <a
+            href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              shrink-0
+              group
+              flex
+              items-center
+              justify-center
+              gap-3
+              px-6
+              py-3.5
+              rounded-2xl
+              bg-gradient-to-br
+              from-rose-400
+              via-pink-500
+              to-fuchsia-500
+              text-white
+              shadow-lg
+              shadow-pink-200
+              hover:scale-[1.02]
+              hover:-translate-y-0.5
+              transition-all
+              duration-300
+            "
+          >
+            <Camera className="w-5 h-5" />
+            <div className="text-left">
+              <p className="text-sm font-extrabold tracking-tight leading-none">사진 올리기</p>
+              <p className="text-[10px] text-white/80 mt-0.5 leading-none">추억 공유방 링크</p>
+            </div>
+          </a>
         </div>
 
         {/* Timeline List */}
@@ -356,7 +330,6 @@ export default function App() {
           </div>
         </div>
       </main>
-
     </div>
   );
 }
