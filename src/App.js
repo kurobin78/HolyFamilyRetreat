@@ -205,9 +205,6 @@ export default function App() {
                   <div className="w-10 h-10 rounded-xl bg-purple-500 text-white font-black flex items-center justify-center shadow-md shadow-purple-200">2</div>
                   <div><p className="text-sm font-bold text-slate-800">2호차 (전세버스)</p><p className="text-xs text-slate-500 font-medium">중고등부 및 학부모</p></div>
                 </div>
-                <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
-                  <div className="w-10 h-10 rounded-xl bg-pink-500 text-white font-black flex items-center justify-center shadow-md shadow-pink-200">바</div>
-                  <div><p className="text-sm font-bold text-slate-800">바울버스</p><p className="text-xs text-slate-500 font-medium">장년층</p></div>
                 </div>
               </div>
             </div>
