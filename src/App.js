@@ -346,4 +346,14 @@ export default function App() {
             <div className="relative pl-8 sm:pl-12 pt-4">
               <div className="absolute -left-[11px] sm:-left-[11px] top-6 w-5 h-5 rounded-full border-[3px] border-white bg-pink-100 shadow-sm z-10"></div>
               <div className="text-center bg-pink-50/50 rounded-2xl py-4 border border-pink-100 text-pink-400 font-bold text-sm">
-                {activeTab === 'day1' ? '첫째 날 일정이 모두 끝났습니다. 평안한 밤 되세요 🌙' : '모
+                {activeTab === 'day1' ? '첫째 날 일정이 모두 끝났습니다. 평안한 밤 되세요 🌙' : '모든 수련회 일정이 은혜 가운데 마쳤습니다 🙏'}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+    </div>
+  );
+}
