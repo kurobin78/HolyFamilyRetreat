@@ -114,14 +114,9 @@ export default function App() {
       {/* 2. BENTO WIDGETS (헤더 배경 밖) */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12 bg-[#FFF5F7]">
         
-        {/* =========================================
-            상단 정보 카드 (일정 / 장소 / 일정표)
-            모바일에서도 한 줄로 예쁘게 나오도록 수정 
-        ========================================= */}
+        {/* 상단 정보 카드 */}
         <div className="flex justify-center mb-8 px-2">
             <div className="flex flex-row items-center justify-center gap-2 sm:gap-6 p-3 sm:p-4 rounded-3xl bg-white/60 backdrop-blur-md border border-rose-100 shadow-sm w-full sm:w-auto overflow-x-auto">
-                
-                {/* 일정 */}
                 <div className="flex items-center gap-2 sm:gap-3 text-rose-900 shrink-0">
                     <div className="p-1.5 sm:p-2 bg-rose-100 rounded-xl">
                       <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500" />
@@ -131,11 +126,7 @@ export default function App() {
                         <div className="font-bold text-xs sm:text-base whitespace-nowrap">7. 17(금) - 7. 18(토)</div>
                     </div>
                 </div>
-                
-                {/* 구분선 */}
                 <div className="w-px h-8 sm:h-10 bg-rose-200 shrink-0"></div>
-                
-                {/* 장소 */}
                 <div className="flex items-center gap-2 sm:gap-3 text-rose-900 shrink-0">
                     <div className="p-1.5 sm:p-2 bg-rose-100 rounded-xl">
                       <Navigation className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500" />
@@ -145,11 +136,7 @@ export default function App() {
                         <div className="font-bold text-xs sm:text-base whitespace-nowrap">YBM 연수원</div>
                     </div>
                 </div>
-
-                {/* 구분선 */}
                 <div className="w-px h-8 sm:h-10 bg-rose-200 shrink-0"></div>
-
-                {/* 일정표 다운로드/보기 버튼 (PDF 링크) */}
                 <div className="flex items-center shrink-0">
                     <a 
                         href="/schedule.pdf" 
@@ -161,7 +148,6 @@ export default function App() {
                         일정표 보기
                     </a>
                 </div>
-
             </div>
         </div>
 
@@ -184,7 +170,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Widget 2: 차량 안내 */}
+          {/* Widget 2: 차량 안내 (수정된 부분) */}
           <div className="bg-white rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-pink-50 hover:shadow-[0_20px_50px_rgba(192,38,211,0.08)] transition-all duration-300 group overflow-hidden relative">
             <div className="absolute -right-8 -top-8 w-32 h-32 bg-fuchsia-50 rounded-full group-hover:scale-150 transition-transform duration-700 ease-out z-0"></div>
             <div className="relative z-10">
@@ -195,14 +181,47 @@ export default function App() {
                 </h3>
               </div>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
-                  <div className="w-10 h-10 rounded-xl bg-fuchsia-500 text-white font-black flex items-center justify-center shadow-md shadow-fuchsia-200">1</div>
-                  <div><p className="text-sm font-bold text-slate-800">1호차 (전세버스)</p><p className="text-xs text-slate-500 font-medium">어린이부 및 학부모</p></div>
+                
+                {/* 1호차 */}
+                <div className="flex items-center justify-between p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-fuchsia-500 text-white font-black flex items-center justify-center shadow-md shadow-fuchsia-200 shrink-0">1</div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-800">1호차 <span className="text-xs font-normal text-slate-500">(전세버스)</span></p>
+                      <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">어린이부 및 학부모</p>
+                    </div>
+                  </div>
+                  <a 
+                    href="/1.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="shrink-0 flex items-center gap-1 px-3 py-1.5 bg-white border border-fuchsia-200 text-fuchsia-600 hover:bg-fuchsia-50 rounded-xl text-xs font-bold shadow-sm transition-all active:scale-95"
+                  >
+                    <Info className="w-3 h-3" />
+                    탑승 정보
+                  </a>
                 </div>
-                <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500 text-white font-black flex items-center justify-center shadow-md shadow-purple-200">2</div>
-                  <div><p className="text-sm font-bold text-slate-800">2호차 (전세버스)</p><p className="text-xs text-slate-500 font-medium">중고등부 및 학부모</p></div>
+
+                {/* 2호차 */}
+                <div className="flex items-center justify-between p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-purple-500 text-white font-black flex items-center justify-center shadow-md shadow-purple-200 shrink-0">2</div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-800">2호차 <span className="text-xs font-normal text-slate-500">(전세버스)</span></p>
+                      <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">중고등부 및 학부모</p>
+                    </div>
+                  </div>
+                  <a 
+                    href="/2.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="shrink-0 flex items-center gap-1 px-3 py-1.5 bg-white border border-purple-200 text-purple-600 hover:bg-purple-50 rounded-xl text-xs font-bold shadow-sm transition-all active:scale-95"
+                  >
+                    <Info className="w-3 h-3" />
+                    탑승 정보
+                  </a>
                 </div>
+
               </div>
             </div>
           </div>
@@ -238,31 +257,7 @@ export default function App() {
             href="https://seumkmc.quickconnect.to/mo/request/9jCley9S1"
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              group
-              flex
-              items-center
-              justify-center
-              gap-3
-              px-8
-              py-4
-              rounded-2xl
-              bg-gradient-to-br
-              from-rose-400
-              via-pink-500
-              to-fuchsia-500
-              text-white
-              shadow-lg
-              shadow-pink-200/60
-              hover:scale-[1.03]
-              hover:-translate-y-0.5
-              active:scale-[0.98]
-              transition-all
-              duration-300
-              w-full
-              sm:w-auto
-              min-w-[240px]
-            "
+            className="group flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-br from-rose-400 via-pink-500 to-fuchsia-500 text-white shadow-lg shadow-pink-200/60 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 w-full sm:w-auto min-w-[240px]"
           >
             <Camera className="w-5 h-5 animate-pulse" />
             <div className="text-left">
@@ -304,18 +299,13 @@ export default function App() {
               
               return (
                 <div key={index} className="relative pl-8 sm:pl-12 group">
-                  {/* Glowing Timeline Node */}
                   <div className={`absolute -left-[19px] sm:-left-[19px] top-1 w-9 h-9 rounded-full flex items-center justify-center border-[3px] border-white ${styles.bg} ${styles.color} shadow-sm group-hover:scale-125 transition-transform duration-300 z-10`}>
                     <Icon className="w-4 h-4" />
                   </div>
                   
-                  {/* Premium Card Design */}
                   <div className={`relative bg-white rounded-3xl p-5 sm:p-6 border border-pink-50/50 shadow-sm hover:shadow-xl hover:shadow-pink-100/50 transition-all duration-300 group-hover:-translate-y-1 overflow-hidden`}>
-                    
-                    {/* Left Accent Line */}
                     <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${styles.line}`}></div>
                     
-                    {/* Background Icon Watermark */}
                     <div className={`absolute -right-4 -bottom-4 opacity-[0.03] transform group-hover:scale-110 transition-transform duration-500`}>
                       <Icon className="w-32 h-32" />
                     </div>
@@ -335,7 +325,6 @@ export default function App() {
                         {item.desc}
                       </p>
                       
-                      {/* Tags */}
                       <div className="flex flex-wrap gap-2 text-sm font-semibold">
                         <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg ${styles.bg} ${styles.color}`}>
                           <MapPin className="w-4 h-4" />
@@ -354,18 +343,7 @@ export default function App() {
               );
             })}
             
-            {/* End of Timeline Indicator */}
             <div className="relative pl-8 sm:pl-12 pt-4">
               <div className="absolute -left-[11px] sm:-left-[11px] top-6 w-5 h-5 rounded-full border-[3px] border-white bg-pink-100 shadow-sm z-10"></div>
               <div className="text-center bg-pink-50/50 rounded-2xl py-4 border border-pink-100 text-pink-400 font-bold text-sm">
-                {activeTab === 'day1' ? '첫째 날 일정이 모두 끝났습니다. 평안한 밤 되세요 🌙' : '모든 수련회 일정이 은혜 가운데 마쳤습니다 🙏'}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </main>
-
-    </div>
-  );
-}
+                {activeTab === 'day1' ? '첫째 날 일정이 모두 끝났습니다. 평안한 밤 되세요 🌙' : '모
