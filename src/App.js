@@ -53,7 +53,7 @@ const getTypeStyles = (type) => {
     };
     case 'activity': return { 
       color: 'text-emerald-600', bg: 'bg-emerald-100', border: 'border-emerald-200',
-      icon: StarIcon, gradient: 'from-emerald-50 to-white', line: 'bg-emerald-400'
+      icon: Sparkles, gradient: 'from-emerald-50 to-white', line: 'bg-emerald-400'
     };
     case 'camera': return { 
       color: 'text-pink-600', bg: 'bg-pink-100', border: 'border-pink-200',
@@ -69,8 +69,6 @@ const getTypeStyles = (type) => {
     };
   }
 };
-
-const StarIcon = ({className}) => <Sparkles className={className} />;
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('day1');
@@ -117,7 +115,7 @@ export default function App() {
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12 bg-[#FFF5F7]">
         
         {/* =========================================
-            수정된 상단 정보 카드 (일정 / 장소 / 일정표)
+            상단 정보 카드 (일정 / 장소 / 일정표)
             모바일에서도 한 줄로 예쁘게 나오도록 수정 
         ========================================= */}
         <div className="flex justify-center mb-8 px-2">
@@ -204,7 +202,6 @@ export default function App() {
                 <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-pink-50/50 border border-pink-100/50">
                   <div className="w-10 h-10 rounded-xl bg-purple-500 text-white font-black flex items-center justify-center shadow-md shadow-purple-200">2</div>
                   <div><p className="text-sm font-bold text-slate-800">2호차 (전세버스)</p><p className="text-xs text-slate-500 font-medium">중고등부 및 학부모</p></div>
-                </div>
                 </div>
               </div>
             </div>
